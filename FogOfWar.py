@@ -1,4 +1,4 @@
-from Board import Board
+from Board import Board, PointState
 import coloredlogs, logging
 
 
@@ -14,6 +14,9 @@ class FogOfWar:
         # Create fog boards
         self.player_one_fog = self.player_two_board.grid_fog
         self.player_two_fog = self.player_one_board.grid_fog
+
+        # Store the size of the board
+        self.size = size
 
         # Create a logger object.
         self.logger = logging.getLogger(__name__)
@@ -44,6 +47,37 @@ class FogOfWar:
             return self.player_one_board.grid, self.player_one_fog
         else:
             return self.player_two_board.grid, self.player_two_fog
+
+    # Prints the board of the given player
+    def printPlayerBoard(self, player_no: bool):
+        if player_no:
+            for i in range(0, self.size):
+                for j in range(0, self.size):
+                    if self.player_one_board.grid[i][j] == PointState.SQUARE:
+                        print('S', "  ", end='')
+                    elif self.player_one_board.grid[i][j] == PointState.CIRCLE:
+                        print('C', "  ", end='')
+                    elif self.player_one_board.grid[i][j] == PointState.PLUS:
+                        print('P', "  ", end='')
+                    elif self.player_one_board.grid[i][j] == PointState.TRIANGLE:
+                        print('T', "  ", end='')
+                    else:
+                        print('-', "  ", end='')
+                print("\n")
+        else:
+            for i in range(0, self.size):
+                for j in range(0, self.size):
+                    if self.player_two_board.grid[i][j] == PointState.SQUARE:
+                        print('S', "  ", end='')
+                    elif self.player_two_board.grid[i][j] == PointState.CIRCLE:
+                        print('C', "  ", end='')
+                    elif self.player_two_board.grid[i][j] == PointState.PLUS:
+                        print('P', "  ", end='')
+                    elif self.player_two_board.grid[i][j] == PointState.TRIANGLE:
+                        print('T', "  ", end='')
+                    else:
+                        print('-', "  ", end='')
+                print("\n")
 
     def isComplete(self):
         if self.player_one_board.numLeft == 0:
