@@ -1,0 +1,5 @@
+coloredlogs==15.0.1
+humanfriendly==10.0
+pip==21.3.1
+pyreadline3==3.3
+setuptools==60.1.1
